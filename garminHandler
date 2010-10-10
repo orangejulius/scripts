@@ -1,0 +1,20 @@
+#!/bin/bash
+FILES_DIR="/home/spectre256/documents/cycling/ride data/Garmin"
+MOUNT_DIR="/media/GARMIN"
+
+cd "${FILES_DIR}"
+svn up
+
+for file in $( ls ${MOUNT_DIR}/Garmin/History/*.tcx );
+do
+	#echo $file
+
+	basename=`basename "$file"`
+	#echo $basename
+	if [ ! -f $basename ]
+	then
+		cp -v $file "${FILES_DIR}"
+		svn add $basename
+	fi
+done
+svn commit -m "Auto adding some ride files."

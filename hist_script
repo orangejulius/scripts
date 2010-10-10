@@ -1,0 +1,14 @@
+#!/usr/bin/perl
+
+$stop_iter = 10;
+%count = ();
+
+while(<>){
+    $first = (split)[0];
+    $count{lc $first}++;
+}
+
+foreach $word (sort {$count{$b} <=>$count{$a}} keys %count) {
+  printf "%5d %s\n", $count{$word}, $word;
+  last if (--$stop_iter == 0);
+}
