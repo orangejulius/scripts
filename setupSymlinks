@@ -1,0 +1,19 @@
+#!/bin/bash
+homeRepoDir=~/repos/home
+dotfilesDir="${homeRepoDir}/dotfiles"
+
+#ln command
+ln="ln -nfs"
+
+#create symlinks to commonly used directories
+$ln ${homeRepoDir}/code/ ~/code
+$ln ${homeRepoDir}/documents/ ~/documents
+
+#symlink all dotfiles
+for dotfile in ${dotfilesDir}/*
+do
+	dotfileName=$(basename $dotfile)
+	$ln -b "${dotfile}" ~/.${dotfileName}
+done
+
+
