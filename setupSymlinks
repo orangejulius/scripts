@@ -7,7 +7,9 @@ ln="ln -nfs"
 
 #create symlinks to commonly used directories
 $ln ${homeRepoDir}/code/ ~/code
-$ln ${homeRepoDir}/documents/ ~/documents
+if [ -d "${homeRepoDir}/documents" ]; then
+	$ln ${homeRepoDir}/documents/ ~/documents
+fi
 
 #symlink all dotfiles
 for dotfile in ${dotfilesDir}/*
