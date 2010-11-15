@@ -14,7 +14,9 @@ do
 	if [ ! -f $basename ]
 	then
 		cp -v $file "${FILES_DIR}"
-		svn add $basename
+		pushd "${FILES_DIR}" > /dev/null
+		git add "$basename"
+		git commit "$basename" -m "adding ride file $basename"
+		popd > /dev/null
 	fi
 done
-svn commit -m "Auto adding some ride files."
