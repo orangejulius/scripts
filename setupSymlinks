@@ -1,5 +1,5 @@
 #!/bin/bash
-homeRepoDir=~/repos/home
+homeRepoDir=~/Documents/home
 dotfilesDir="${homeRepoDir}/dotfiles"
 
 #ln command
