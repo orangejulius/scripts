@@ -3,7 +3,6 @@ FILES_DIR="/home/spectre256/documents/cycling/ride data/Garmin"
 MOUNT_DIR="/media/GARMIN"
 
 cd "${FILES_DIR}"
-svn up
 
 for file in $( ls ${MOUNT_DIR}/Garmin/History/*.tcx );
 do
