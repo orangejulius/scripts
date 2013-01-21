@@ -1,5 +1,9 @@
 #!/bin/bash
-homeRepoDir=~/Documents/home
+if [ -d "/Users"]; then
+	homeRepoDir=~/Documents/home #osx
+else
+	homeRepoDir=~/repos/home #linux
+fi
 dotfilesDir="${homeRepoDir}/dotfiles"
 
 #ln command
