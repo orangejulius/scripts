@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -d "/Users"]; then
+if [ -d "/Users" ]; then
 	homeRepoDir=~/Documents/home #osx
 else
 	homeRepoDir=~/repos/home #linux
