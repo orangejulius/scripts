@@ -1,7 +1,8 @@
 #!/bin/bash
 
-cd ~/reps
-for i in `ls` do
+cd ~/repos
+
+for i in `ls`; do
 	pushd $i
 	git fetch
 	popd
