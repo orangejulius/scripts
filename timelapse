@@ -17,7 +17,4 @@ popd
 avconv -r 15 -i $pictureDir/%d.jpg -s 2560x1920 -r 15 ${pictureDir}.mkv -threads 4
 
 #unlink symlinks
-pushd $pictureDir
-for i in `ls *.jpg` do
-	unlink $i
-done
+find $pictureDir -type l | xargs rm
