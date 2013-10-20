@@ -14,7 +14,7 @@ done
 popd
 
 # make movie
-avconv -i $pictureDir/%d.jpg -s 2560x1920 ${pictureDir}.mkv -threads 4
+avconv -r 15 -i $pictureDir/%d.jpg -s 2560x1920 -r 15 ${pictureDir}.mkv -threads 4
 
 #unlink symlinks
 pushd $pictureDir
