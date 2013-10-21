@@ -3,7 +3,7 @@
 pictureDir=$1
 
 # make symlinks
-pushd $pictureDir
+pushd $pictureDir > /dev/null
 
 j=0
 for i in `ls *.JPG`; do
@@ -11,7 +11,7 @@ for i in `ls *.JPG`; do
 	j=$((j+1))
 done
 
-popd
+popd > /dev/null
 
 # make movie
 avconv -r 15 -i $pictureDir/%d.jpg -s 2560x1920 -r 15 ${pictureDir}.mkv -threads 4
