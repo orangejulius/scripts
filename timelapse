@@ -21,6 +21,3 @@ popd > /dev/null
 
 # make movie
 avconv -threads 4 -r $framerate -i $pictureDir/%d.jpg -s 2560x1920 -pre libx264-slower -qp 15 -r $framerate ${pictureDir}-${framerate}.mkv
-
-#unlink symlinks
-find $pictureDir -type l | xargs rm
