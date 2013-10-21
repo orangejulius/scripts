@@ -1,6 +1,12 @@
 #!/bin/bash
 
 pictureDir=$1
+framerate=25
+
+if [[ "$2" -ne "" ]]; then
+	framerate=$2
+fi
+
 
 # make symlinks
 pushd $pictureDir > /dev/null
@@ -14,7 +20,7 @@ done
 popd > /dev/null
 
 # make movie
-avconv -r 15 -i $pictureDir/%d.jpg -s 2560x1920 -r 15 ${pictureDir}.mkv -threads 4
+avconv -threads 4 -r $framerate -i $pictureDir/%d.jpg -s 2560x1920 -pre libx264-slower -qp 15 -r $framerate ${pictureDir}-${framerate}.mkv
 
 #unlink symlinks
 find $pictureDir -type l | xargs rm
