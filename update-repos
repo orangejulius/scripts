@@ -3,7 +3,7 @@
 cd ~/repos
 
 for i in `ls`; do
-	pushd $i
+	pushd $i > /dev/null
 	git fetch
-	popd
+	popd > /dev/null
 done
