@@ -1,6 +1,6 @@
 #!/bin/bash
 FILES_DIR="/home/spectre256/documents/cycling/ride data/Garmin"
-MOUNT_DIR="/run/media/spectre256/GARMIN"
+MOUNT_DIR="/mnt/usb"
 
 cd "${FILES_DIR}"
 
