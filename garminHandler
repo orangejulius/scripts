@@ -15,7 +15,7 @@ do
 		cp -v $file "${FILES_DIR}"
 		pushd "${FILES_DIR}" > /dev/null
 		git add "$basename"
-		git commit "$basename" -m "adding ride file $basename"
+		git commit "$basename" -m "Add ride file $basename"
 		popd > /dev/null
 	fi
 done
