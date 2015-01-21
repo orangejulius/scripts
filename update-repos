@@ -2,8 +2,18 @@
 
 cd ~/repos
 
-for i in `ls`; do
-	pushd $i > /dev/null
+for i in *; do
+	if [[ ! -d "$i" ]]; then
+		continue
+	fi
+
+	pushd "$i" > /dev/null
+
+	if [[ ! -d ".git" ]]; then
+		popd > /dev/null
+		continue
+	fi
+
 	git fetch
 	popd > /dev/null
 done
