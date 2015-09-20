@@ -1,0 +1,33 @@
+#!/bin/bash
+
+if [[ -z "$git_repo_dir" ]]; then
+	echo "git_repo_dir not defined"
+	exit 1
+fi
+
+if [[ -z "$filename" ]]; then
+	echo "filename not defined"
+	exit 1
+fi
+
+if [[ -z "$remote_host" ]]; then
+	echo "remote host not defined"
+	exit 1
+fi
+
+if [[ -z "$remote_path" ]]; then
+	echo "remote path not defined"
+	exit 1
+fi
+
+if [[ -z "$branch" ]]; then
+	branch=master
+fi
+
+current_date=$(date +"%Y-%m-%dT%H:%M:%SZ")
+
+pushd "${git_repo_dir}" > /dev/null
+  /usr/bin/git bundle create ~/${filename}.gitbundle ${branch} 2>&1 > /dev/null
+  /bin/bzip2 -c ~/${filename}.gitbundle | /usr/bin/gpg -e | /usr/bin/ssh ${remote_host} "cat - > ${remote_path}/${filename}-${current_date}.gitbundle.bz2.gpg"
+  rm -f ~/${filename}.gitbundle
+popd > /dev/null
