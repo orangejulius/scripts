@@ -1,18 +1,8 @@
 #!/bin/bash
 
-cd ~/repos
-
-for i in *; do
-	if [[ ! -d "$i" ]]; then
-		continue
-	fi
-
-	pushd "$i" > /dev/null
-
-	if [[ ! -d ".git" ]]; then
-		popd > /dev/null
-		continue
-	fi
+for i in `find ~/repos/ -type d -name .git`; do
+	pushd "$i/.." > /dev/null
+	echo $i
 
 	git fetch
 	popd > /dev/null
