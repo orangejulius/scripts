@@ -8,6 +8,7 @@ createTunnel() {
         echo An error occurred creating a tunnel to hostb RC was $?
     fi
 }
+
 /usr/bin/ssh -p 19922 localhost ls > /dev/null
 if [[ $? -ne 0 ]]; then
 	echo Creating new tunnel connection
