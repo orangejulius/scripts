@@ -1,0 +1,38 @@
+#!/bin/bash
+set -euo pipefail
+set -x
+
+# A script to help connect to a computer beind a home router (with NAT) without
+# the hassle of a full VPN setup. Requires a server somewhere on the internet
+
+SERVER_SSH_PORT=27823 # probably 22, but change this if you run SSH on a non-standard port
+SERVER_HOSTNAME=juliansimioni.com # the DNS name of the server you wish to use as a proxy for SSH
+SSH_PORT=10122 # port on the internet host that can be used to ssh into this machine
+CANARY_PORT=10023 # port this script will use to check the connection is still running
+LOCAL_SSH_PORT=22 # port where SSH is running on the local machine (almost certainly 22)
+
+friendly_date=`date -Iseconds`
+
+# calculate the ssh command that can be run to connect to this instance
+ssh_command="\`ssh -t -p $SERVER_SSH_PORT $SERVER_HOSTNAME 'ssh localhost -p $SSH_PORT'\`"
+
+createTunnel() {
+    /usr/bin/ssh -f -N -R $SSH_PORT:localhost:22 -L$CANARY_PORT:$SERVER_HOSTNAME:$SERVER_SSH_PORT $SERVER_HOSTNAME
+    if [[ $? -eq 0 ]]; then
+        echo "$friendly_date: tunnel to $SERVER_HOSTNAME created successfully. Use $ssh_command to ssh to this machine"
+    else
+        echo "$friendly_date: an error occurred creating a tunnel to $SERVER_HOSTNAME. return code was $?"
+    fi
+}
+
+set +e
+/usr/bin/ssh -p $CANARY_PORT localhost ls > /dev/null
+tunnel_exists=$?
+set -e
+
+if [[ $tunnel_exists -ne 0 ]]; then
+	echo "$friendly_date: Creating new tunnel connection"
+	createTunnel
+else
+	echo "$friendly_date: tunnel still intact, nothing to do. Connect with $ssh_command"
+fi
