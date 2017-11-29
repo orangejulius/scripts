@@ -1,0 +1,19 @@
+#!/bin/bash
+counter=0
+limit=25
+summary="Pomodoro"
+startmessage="$limit minutes to go"
+endmessage="break time"
+notify-send -u critical -i appointment -t 600 "$summary" "$startmessage"
+echo
+while [ $counter != $limit ]; do
+   echo "$counter minutes so far...";
+   sleep 60
+   let "counter = $counter + 1"
+done
+if [[ "$counter" -eq "$limit" ]]; then
+	echo
+   notify-send -u critical -i appointment "$summary" "$endmessage"
+   echo -e '\a' <&2
+   exit 0
+fi
