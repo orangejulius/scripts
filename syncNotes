@@ -3,12 +3,12 @@
 cd ~/repos/notes
 
 for file in $(git ls-files); do
-		git commit "$file" -m "Update $file" || true
+		git commit "$file" -m "Update $file" --no-gpg-sign || true
 done
 
 for file in *; do
 		git add "$file" || true
-		git commit "$file" -m "Add $file" || true
+		git commit "$file" -m "Add $file" --no-gpg-sign || true
 done
 
 git push pacific
