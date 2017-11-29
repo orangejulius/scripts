@@ -1,5 +1,7 @@
 #!/bin/bash
 
-xflux -l 52.5 -g 13.33 # berlin
+#xflux -l 52.5 -g 13.33 # berlin
 #xflux -z 92084 # SD
 #xflux -z 94123 # SF
+xflux -z 10010 # nyc
+#xflux -z 30303 #ATL
