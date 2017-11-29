@@ -28,6 +28,7 @@ current_date=$(date +"%Y-%m-%dT%H:%M:%SZ")
 
 pushd "${git_repo_dir}" > /dev/null
   /usr/bin/git bundle create ~/${filename}.gitbundle ${branch} 2>&1 > /dev/null
+  echo "$current_date: publishing to ${filename}-${current_date}.gitbundle.bz2.gpg"
   /bin/bzip2 -c ~/${filename}.gitbundle | /usr/bin/gpg -e | /usr/bin/ssh ${remote_host} "cat - > ${remote_path}/${filename}-${current_date}.gitbundle.bz2.gpg"
   rm -f ~/${filename}.gitbundle
 popd > /dev/null
