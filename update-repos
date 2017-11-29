@@ -4,6 +4,6 @@ for i in `find ~/repos/ -type d -name .git`; do
 	pushd "$i/.." > /dev/null
 	echo $i
 
-	git fetch
+	git fetch --all -p
 	popd > /dev/null
 done
