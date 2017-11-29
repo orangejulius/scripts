@@ -1,0 +1,9 @@
+#!/bin/bash
+
+for i in `find ~/repos/ -type d -name .git`; do
+	pushd "$i/.." > /dev/null
+	echo $i
+
+	git fsck
+	popd > /dev/null
+done
