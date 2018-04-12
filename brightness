@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+max=`cat /sys/class/backlight/*/max_brightness`
+
+percent=${1:-40}
+
+desired=$(((percent * max) / 100))
+
+echo $desired | sudo tee /sys/class/backlight/*/brightness
